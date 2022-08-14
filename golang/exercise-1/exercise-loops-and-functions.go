@@ -2,13 +2,17 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 func Sqrt(x float64) float64 {
 	z := x
-	for i := 0; i < 10; i++ {
-		z = z - (z*z-x)/(2*z)
-		fmt.Printf("guess[%v]: %v\n", i, z)
+	newz := z - (z*z-x)/(2*z)
+
+	for math.Abs(newz-z)/((newz+z)/2) > 1e-6 {
+		z = newz
+		newz = z - (z*z-x)/(2*z)
+		fmt.Printf("guess: %v\n", z)
 	}
 	return z
 }
