@@ -4,7 +4,10 @@ import "fmt"
 
 type IPAddr [4]byte
 
-// TODO: Add a "String() string" method to IPAddr.
+// MEMO: implementing to *IPAddr does not work
+func (addr IPAddr) String() string {
+	return fmt.Sprintf("%d.%d.%d.%d", addr[0], addr[1], addr[2], addr[3])
+}
 
 func main() {
 	hosts := map[string]IPAddr{
