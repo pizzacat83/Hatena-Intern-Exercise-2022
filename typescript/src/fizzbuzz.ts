@@ -4,16 +4,23 @@ export function initializeFizzBuzz(
 ): void {
   console.debug("initializeFizzBuzz", list, button);
 
-  let i = 1;
+  let counter = new Counter();
 
   button.addEventListener("click", () => {
-    const text = fizzbuzz(i);
+    const text = fizzbuzz(counter.next());
     const li = document.createElement("li");
     // innerText works in browser but not in test (jsdom) https://github.com/jsdom/jsdom/issues/1245
     li.textContent = text;
     list.appendChild(li);
-    i += 1;
   });
+}
+
+class Counter {
+  #next = 1;
+
+  next(): number {
+    return this.#next++;
+  }
 }
 
 const fizzbuzz = (i: number): string => {
